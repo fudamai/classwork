@@ -1,0 +1,6 @@
+{
+    "username": "admin",
+    "password": "admin",
+    "type": "admin",
+    "operation": ["weighting", "blacklist", "word_util", "image_util"]
+}

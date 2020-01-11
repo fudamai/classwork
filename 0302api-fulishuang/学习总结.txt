@@ -1,0 +1,11 @@
+本关知识：
+标准库：time、datetime、json、subprocess、repuest、collections、smtplib、email
+第三方库：dareutil、BeautifulSoup、jieba、pillow
+
+邮件的基础知识
+图像的基础知识
+什么是json。 易于人阅读和编写。同时也易于机器解析和生成。可用于数据交换
+什么是API。应用程序接口，不是太能理解
+HTML依然是文本
+
+定义状态的常量文件。不会用
