@@ -1,0 +1,177 @@
+body {
+    color: yellowgreen;
+}
+
+h1 {
+    font-size: 40px;
+    color: orange;
+    text-align: center;
+}
+
+.draw-box {
+    position: relative;
+    margin: 0 auto;
+    margin-top: 2%;
+    width: 600px;
+    height: 1000px;
+    border: 1px solid red;
+}
+
+.head {
+    position: absolute;
+    top: 12%;
+    left: 19%;
+    width: 65%;
+    height: 31%;
+    background: #ff9900;
+    border-radius: 50%;
+    animation: shake infinite 2s alternate;
+}
+.ear {
+    position: absolute;
+    top: 5%;
+    width: 40px;
+    height: 30px;
+    /* background-color: #ff990091; */
+    border: 1px solid #ff9900;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.ear-left {
+    left: 8%;
+    transform: rotate(139deg);
+    background-color: #ff990070;
+}
+.ear-right {
+    right: 8%;
+    transform: rotate(220deg);
+    background-color: #ff990070;
+}
+
+.eye {
+    position: absolute;
+    width: 10%;
+    height: 10%;
+    top: 40%;
+    background: #000;
+    border-radius: 50%;
+}
+
+.eye-left {
+    left: 22%;
+}
+
+.eye-right {
+    right: 22%;
+}
+
+.nose {
+    position: absolute;
+    top: 63%;
+    left: 48%;
+    height: 25px;
+    width: 30px;
+    background-color: #000;
+    border-radius: 50%;
+}
+
+.mouse {
+    position: absolute;
+    top: 66%;
+    left: 40%;
+    width: 100px;
+    height: 50px;
+    border-bottom: 3px solid #ff4963;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.thorax {
+    position: absolute;
+    top: 40%;
+    left: 35%;
+    width: 35%;
+    height: 40%;
+    background: #ff9900;
+    border-radius: 20%;
+}
+
+.hand {
+    position: absolute;
+    top: 45%;
+    width: 5%;
+    height: 19%;
+    border: 1px solid #ff9900;
+    border-radius: 10%;
+}
+
+.hand-left {
+    left: 26%;
+    background-color: #ff9900;
+    transform: rotate(30deg);
+}
+
+.hand-right {
+    right: 21%;
+    background-color: #ff9900;
+    transform: rotate(-30deg);
+}
+
+.leg {
+    position: absolute;
+    top: 70%;
+    width: 5%;
+    height: 29%;
+    border: 1px solid #ff9900;
+    border-bottom: 15px solid black;
+    border-radius: 10%;    
+}
+
+.leg-left {
+    left: 35%;
+    background-color: #ff9900;
+    animation: walk-left infinite 2s alternate ;
+}
+
+.leg-right {
+    right: 30%;
+    background-color: #ff9900;
+    animation: walk-right infinite 2s alternate ;
+}
+
+@keyframes walk-left {
+    0% {
+        transform: rotateX(0deg);
+    }
+    50% {
+        transform: rotateX(40deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+    }
+}
+
+@keyframes walk-right {
+    0% {
+        transform: rotateX(40deg);
+    }
+    50% {
+        transform: rotateX(0deg);
+    }
+    100% {
+        transform: rotateX(40deg);
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(5deg);
+    }
+    50% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(-5deg);
+    }
+}

@@ -1,0 +1,43 @@
+.work-info {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.line {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100px;
+}
+.info {
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+}
+.frist-line {
+    /* display: inline-block; */
+    height: 145px;
+    width: 100%;
+} 
+.pure-color-block {
+    height: 145px;
+    width: 100%;
+    background: #22d3b6;
+}
+.info-title {
+    height: 145px;
+    width: 196px;
+    background: #262d3f;
+    color: #ffffff;
+}
+.second-line {
+    /* display: inline-block; */
+    /* flex-basis: 100px; */
+}
+.third-line {
+    /* display: block; */
+}
+.work5 {
+    width: 196px;
+}
