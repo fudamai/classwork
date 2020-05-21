@@ -1,0 +1,187 @@
+/* car css by fubai */
+/* css初始化，去除各个浏览器默认样式 */
+body,
+ol,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+th,
+td,
+dl,
+dd,
+form,
+fieldset,
+legend,
+input,
+textarea,
+select {
+    margin: 0;
+    padding: 0
+}
+
+body {
+    font: 12px"宋体", "Arial Narrow", HELVETICA;
+    background: #fff;
+    -webkit-text-size-adjust: 100%;
+}
+
+a {
+    color: #2d374b;
+    text-decoration: none
+}
+
+a:hover {
+    color: #cd0200;
+    text-decoration: underline
+}
+
+em {
+    font-style: normal
+}
+
+li {
+    list-style: none
+}
+
+img {
+    border: 0;
+    vertical-align: middle
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+p {
+    word-wrap: break-word
+}
+
+/* 自定义样式 */
+.cart {
+    margin: 0 auto;
+    width: 600px;
+    margin-top: 50px;
+    background-color: #fff;
+    border: 1px solid #aaaaaa;
+}
+
+.shop {
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+}
+
+.shop-name {
+    color: #fff;
+    background-color: red;
+    padding: 3px;
+}
+
+.buy-other {
+    padding: 2px;
+    margin-left: 10px;
+    background-color: #fff;
+    border: 1px solid rgb(202, 146, 41);
+    color: rgb(102, 106, 40);
+    width: 30px;
+}
+
+.item-to-buy {
+    height: 80px;
+    padding-left: 20px;
+    border: 1px solid #aaaaaa;
+}
+
+.item-line {
+    display: inline-block;
+}
+
+.item-image {
+    margin-right: 20px;
+    height: 80px;
+}
+
+.item-info {
+    width: 300px;
+}
+
+.item-count {
+    width: 20px;
+    margin: 10px 10px;
+}
+
+.item-count>input {
+    width: 42px;
+    height: 18px;
+}
+
+.price {
+    width: 20px;
+    margin: 10px 30px;
+}
+
+.end-box {
+    padding: 20px;
+    display: block;
+}
+
+.pay {
+    float: right;
+    display: block;
+    position: relative;
+    width: 94px;
+    height: 52px;
+    line-height: 52px;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    font-family: "Microsoft YaHei";
+    background: #e54346;
+    overflow: hidden;    
+    bottom: 18px;
+    left: 16px;
+}
+
+.pay a {
+    color: #fff;
+}
+
+.total {
+    float: right;
+    /* 添加右悬浮 */
+}
+
+.total .total-price {
+    color: #cd0200;
+    font-size: 30px;
+}
+
+.cart-bar {
+    display: block;
+    margin: 10px 0px;
+    bottom: 8px;
+    position: relative;
+    color: #666666;
+}
+
+.switch-cart {
+    float: left;
+    position: relative;
+    font-size: 16px;
+    font-weight: 700;
+    color: #e2231a;
+
+}
+
+.cart-store {
+    float: right;
+    display: block;
+    margin-bottom: 10px;
+    padding-left: 122px;
+}
+
