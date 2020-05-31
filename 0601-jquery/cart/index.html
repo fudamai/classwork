@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <title>fubai-shopping-cart</title>
+</head>
+
+<body>
+    <div class="cart">
+        <!-- 分为六个部分 -->
+        <div class="cart-bar">
+            <div class="switch-cart">
+                全部商品
+            </div>
+            <div class="cart-store">
+                <label for="">配送地址：
+                    <select name="address" id="address">
+                        <option value="合肥">安徽省合肥市蜀山区紫云路99号</option>
+                        <option value="巢湖">安徽省巢湖市安成路与东塘路交叉口</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+        <br>
+
+        <div class="shop">
+            <label for="shop-fu">
+                <input type="checkbox" name="shop-fu">
+                <span class="shop-name">京东自营</span>
+            </label>
+        </div>
+        <div>
+            <!-- 一个商品列表框分为两个区域、六个部分 -->
+            <div class="buy-other">
+                <!-- 可点击的部分使用a标签 -->
+                <a href="#">换购</a>
+            </div>
+            <div class="item-to-buy" id="item-1">
+                <div class="item-line">
+                    <!--  -->
+                    <input type="checkbox" name="item-check" id="item-check-1">
+                </div>
+                <div class="item-line"><img class="item-image" src="images/1.jpg" alt="item-1"></div>
+                <div class="item-line">
+                    <div class="item-info">鼠标</div>
+                </div>
+                <div class="item-line">
+                    <div class="item-count">
+                        <input type="number" value="1" min="1" max="999" name="price" id="change-quantity-1">
+                    </div>
+                </div>
+                <div class="item-line price">
+                    <div class="item-price-1" price="79">
+                        <strong>￥79</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <!-- 一个商品列表框分为两个区域、六个部分 -->
+            <div class="buy-other">
+                <!-- 可点击的部分使用a标签 -->
+                <a href="#">换购</a>
+            </div>
+            <div class="item-to-buy" id="item-2">
+                <div class="item-line">
+                    <!--  -->
+                    <input type="checkbox" name="item-check" id="item-check-2">
+                </div>
+                <div class="item-line"><img class="item-image" src="images/2.jpg" alt="item-2"></div>
+                <div class="item-line">
+                    <div class="item-info">哨子</div>
+                </div>
+                <div class="item-line">
+                    <div class="item-count">
+                        <input type="number" value="1" min="1" max="999" name="price" id="change-quantity-2">
+                    </div>
+                </div>
+                <div class="item-line price">
+                    <div class="item-price-2" price="7">
+                        <strong>￥7</strong>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <!-- 一个商品列表框分为两个区域、六个部分 -->
+                <div class="buy-other">
+                    <!-- 可点击的部分使用a标签 -->
+                    <a href="#">换购</a>
+                </div>
+                <div class="item-to-buy" id="item-3">
+                    <div class="item-line">
+                        <!--  -->
+                        <input type="checkbox" name="item-check" id="item-check-3">
+                    </div>
+                    <div class="item-line"><img class="item-image" src="images/3.jpg" alt="item-3"></div>
+                    <div class="item-line">
+                        <div class="item-info">蒙牛牛奶</div>
+                    </div>
+                    <div class="item-line">
+                        <div class="item-count">
+                            <input type="number" value="1" min="1" max="999" name="price" 
+                            id="change-quantity-3">
+                        </div>
+                    </div>
+                    <div class="item-line price">
+                        <div class="item-price-3" price="49">
+                            <strong>￥49</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="end-box">
+                    <!-- 购物车底部操作栏 -->
+                    <input type="checkbox" name="check-all" id="check-all">
+                    <label for="check-all">全选</label>
+                    <a href="#" class="delete-choose">删除选中商品</a>
+                    <a href="#" class="delete-all">清理购物车</a>
+                    <div class="pay">
+                        <a class="pay-btn">去结算</a>
+                    </div>
+                    <div class="total">
+                        总价格
+                        <strong class="total-price">￥0.00</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="js/jquery-3.3.1.js"></script>
+        <!-- jquery文件放在自定义代码前 -->
+        <script src="js/cart.js"></script>
+</body>
+
+</html>
+
+<!-- 未完成：点击结算按钮弹出一个结算窗口 -->
