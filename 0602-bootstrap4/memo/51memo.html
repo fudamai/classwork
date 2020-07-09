@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ch-en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="memo.css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        .to-top {
+            display: inline-block;
+            position: fixed;
+            right: 10px;
+            bottom: 15%;
+            text-align: center;
+            font-size: 1rem;
+        }
+    </style>
+    <title>51memo x bootstrap</title>
+</head>
+
+<body>
+    <a href="#!" class="btn btn-primary btn-block">Block level button</a>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">51MEMO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">主页 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">链接</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">不可用链接</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">下拉列表</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="搜索" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Hello, world!</h1>
+            <p class="lead">美好的一天开始了.</p>
+            <hr class="my-4">
+            <p>快规划一下今天要做的事情吧！</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal"
+                    data-target="#addModalCenter">添加</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addModalCenter" tabindex="-1" role="dialog" aria-labelledby="addModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalCenterTitle">添加新备忘信息</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="memo-title" class="col-form-label">概要</label>
+                            <input type="text" class="form-control" id="memo-title">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">具体信息</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
+                        <div class="row justify-content-center">
+                            <label for="" class="first-quadrant text-success">重要不紧急
+                                <input type="radio" name="choose" value="1" checked>
+                            </label>
+                            <label for="" class="second-quadrant text-danger">重要且紧急
+                                <input type="radio" name="choose" value="2">
+                            </label>
+                            <label for="" class="third-quadrant text-info">紧急不重要
+                                <input type="radio" name="choose" value="3">
+                            </label>
+                            <label for="" class="fourth-quadrant text-warning">
+                                不重要不紧急<input type="radio" name="choose" value="4">
+                            </label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modify Modal -->
+    <div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="modifyModalTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modifyModalTitle">修改备忘信息</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="memo-title" class="col-form-label">概要</label>
+                            <input type="text" class="form-control" id="modify-memo-title">
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">具体信息</label>
+                            <textarea class="form-control" id="modify-message-text"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-12">
+                                <li class="list-group-item  list-group-item-action active">今天</li>
+                            </div>
+                            <div class="col border-right" id="first-quadrant">
+                                <div class="list-group-item list-group-item-success">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="重要不紧急的"
+                                                    id="defaultCheck1">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    重要不紧急
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="btn-group float-right d-none" role="group"
+                                                aria-label="Button group with nested dropdown">
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                    data-target="#modifyModal">修改</button>
+                                                <button type="button" class="btn btn-danger">删除</button>
+
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop1" type="button"
+                                                        class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        移动
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" href="#">明天</a>
+                                                        <a class="dropdown-item" href="#">七天</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col" id="second-quadrant">
+                                <li class="list-group-item list-group-item-danger">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="重要且紧急"
+                                                    id="defaultCheck2">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    重要且紧急
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="btn-group float-right d-none" role="group"
+                                                aria-label="Button group with nested dropdown">
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                    data-target="#modifyModal">修改</button>
+                                                <button type="button" class="btn btn-danger">删除</button>
+
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop2" type="button"
+                                                        class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        移动
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" href="#">明天</a>
+                                                        <a class="dropdown-item" href="#">七天</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </div>
+                            <hr class="w-100">
+                            </hr>
+                            <div class="col border-right" id="fouth-quadrant">
+                                <li class="list-group-item list-group-item-warning">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="不重要不紧急"
+                                                    id="defaultCheck3">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    不重要不紧急
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="btn-group float-right d-none" role="group"
+                                                aria-label="Button group with nested dropdown">
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                    data-target="#modifyModal">修改</button>
+                                                <button type="button" class="btn btn-danger">删除</button>
+
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop3" type="button"
+                                                        class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        移动
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" href="#">明天</a>
+                                                        <a class="dropdown-item" href="#">七天</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="col" id="third-quadrant">
+                                <li class="list-group-item list-group-item-info">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="紧急不重要"
+                                                    id="defaultCheck4">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    紧急不重要
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="btn-group float-right d-none" role="group"
+                                                aria-label="Button group with nested dropdown">
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                    data-target="#modifyModal">修改</button>
+                                                <button type="button" class="btn btn-danger">删除</button>
+
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop4" type="button"
+                                                        class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        移动
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" href="#">明天</a>
+                                                        <a class="dropdown-item" href="#">七天</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-4">
+
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-12">
+                                <li class="list-group-item  list-group-item-action active">明天</li>
+                            </div>
+                            <div class="col border-right" id="first-quadrant">
+                                <div class="list-group-item list-group-item-success">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="重要不紧急的"
+                                                    id="defaultCheck1">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    重要不紧急
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="btn-group float-right d-none" role="group"
+                                                aria-label="Button group with nested dropdown">
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                    data-target="#modifyModal">修改</button>
+                                                <button type="button" class="btn btn-danger">删除</button>
+
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop1" type="button"
+                                                        class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        移动
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" href="#">明天</a>
+                                                        <a class="dropdown-item" href="#">七天</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col" id="second-quadrant">
+                                <li class="list-group-item list-group-item-danger">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="重要且紧急"
+                                                    id="defaultCheck2">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    重要且紧急
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="btn-group float-right d-none" role="group"
+                                                aria-label="Button group with nested dropdown">
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                    data-target="#modifyModal">修改</button>
+                                                <button type="button" class="btn btn-danger">删除</button>
+
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop2" type="button"
+                                                        class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        移动
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" href="#">明天</a>
+                                                        <a class="dropdown-item" href="#">七天</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </div>
+                            <hr class="w-100">
+                            </hr>
+                            <div class="col border-right" id="fouth-quadrant">
+                                <li class="list-group-item list-group-item-warning">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="不重要不紧急"
+                                                    id="defaultCheck3">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    不重要不紧急
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="btn-group float-right d-none" role="group"
+                                                aria-label="Button group with nested dropdown">
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                    data-target="#modifyModal">修改</button>
+                                                <button type="button" class="btn btn-danger">删除</button>
+
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop3" type="button"
+                                                        class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        移动
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" href="#">明天</a>
+                                                        <a class="dropdown-item" href="#">七天</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="col" id="third-quadrant">
+                                <li class="list-group-item list-group-item-info">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="紧急不重要"
+                                                    id="defaultCheck4">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    紧急不重要
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="btn-group float-right d-none" role="group"
+                                                aria-label="Button group with nested dropdown">
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                    data-target="#modifyModal">修改</button>
+                                                <button type="button" class="btn btn-danger">删除</button>
+
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop4" type="button"
+                                                        class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        移动
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" href="#">明天</a>
+                                                        <a class="dropdown-item" href="#">七天</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-4">
+
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-12">
+                                <li class="list-group-item  list-group-item-action active">七天内备忘</li>
+                            </div>
+                            <div class="col border-right" id="first-quadrant">
+                                <div class="list-group-item list-group-item-success">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="重要不紧急的"
+                                                    id="defaultCheck1">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    重要不紧急
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="btn-group float-right d-none" role="group"
+                                                aria-label="Button group with nested dropdown">
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                    data-target="#modifyModal">修改</button>
+                                                <button type="button" class="btn btn-danger">删除</button>
+
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop1" type="button"
+                                                        class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        移动
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" href="#">明天</a>
+                                                        <a class="dropdown-item" href="#">七天</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col" id="second-quadrant">
+                                <li class="list-group-item list-group-item-danger">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="重要且紧急"
+                                                    id="defaultCheck2">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    重要且紧急
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="btn-group float-right d-none" role="group"
+                                                aria-label="Button group with nested dropdown">
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                    data-target="#modifyModal">修改</button>
+                                                <button type="button" class="btn btn-danger">删除</button>
+
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop2" type="button"
+                                                        class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        移动
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" href="#">明天</a>
+                                                        <a class="dropdown-item" href="#">七天</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </div>
+                            <hr class="w-100">
+                            </hr>
+                            <div class="col border-right" id="fouth-quadrant">
+                                <li class="list-group-item list-group-item-warning">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="不重要不紧急"
+                                                    id="defaultCheck3">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    不重要不紧急
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="btn-group float-right d-none" role="group"
+                                                aria-label="Button group with nested dropdown">
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                    data-target="#modifyModal">修改</button>
+                                                <button type="button" class="btn btn-danger">删除</button>
+
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop3" type="button"
+                                                        class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        移动
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" href="#">明天</a>
+                                                        <a class="dropdown-item" href="#">七天</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </div>
+                            <div class="col" id="third-quadrant">
+                                <li class="list-group-item list-group-item-info">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="紧急不重要"
+                                                    id="defaultCheck4">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                    紧急不重要
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="btn-group float-right d-none" role="group"
+                                                aria-label="Button group with nested dropdown">
+                                                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                                    data-target="#modifyModal">修改</button>
+                                                <button type="button" class="btn btn-danger">删除</button>
+
+                                                <div class="btn-group" role="group">
+                                                    <button id="btnGroupDrop4" type="button"
+                                                        class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false">
+                                                        移动
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                                        <a class="dropdown-item" href="#">明天</a>
+                                                        <a class="dropdown-item" href="#">七天</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-4">
+
+            </div>
+            <div class="col col-3">
+                <ul class="list-group">
+                    <p class="lead">本周总结</p>
+                    <li class="list-group-item d-flex justify-content-between align-items-center" id="doing">
+                        进行中
+                        <span class="badge badge-primary badge-pill">14</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center" id="done">
+                        已完成
+                        <span class="badge badge-primary badge-pill">2</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center" id="trash">
+                        已放弃
+                        <span class="badge badge-primary badge-pill">1</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <a href="#top" class="to-top btn-primary btn-lg disabled" role="button" aria-disabled="true">上</a>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2020</p>
+        <P>Bulid By fudamai</P>
+        <p>联系邮箱：furight@foxmail.com</p>
+    </footer>
+    <!-- Bootstrap core JavaScript
+              ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+    <script>
+        $(function () {
+            // 是否显示操作按钮
+            $('.list-group-item').hover(function () {
+                const div = $(this).find('.btn-group')[0];
+                console.log(div);
+                if (div) {
+                    $(div).removeClass('d-none');
+                }
+            }, function () {
+                const div = $(this).find('.btn-group')[0];
+                // console.log(div);
+                if (div) {
+                    $(div).addClass('d-none');
+                }
+            });
+
+            // 修改信息
+            $('#modifyModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                console.log(button);
+                var modal = $(this);
+                var text = button.parent().parent().prev().find('.form-check-input').val()
+                console.log(text);
+                modal.find('#modify-memo-title').val(text);
+            })
+        })
+    </script>
+</body>
+
+</html>
