@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>确认页</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!-- Custom styles for this template -->
+  <link href="checkout.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Nokia</h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+      <a class="p-2 text-dark" href="../product/product.html">首页</a>
+    </nav>
+    <!-- <a class="btn btn-outline-primary" href="#">Sign up</a> -->
+  </div>
+
+  <div class="container">
+    <div class="py-5 text-center">
+      <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt=""
+        width="72" height="72">
+      <h2>确认您的订单</h2>
+      <p class="lead">请按提示填写下面信息，点击确认按钮提交您填写的信息。系统确认您的订单后，会再24小时内将您购买的商品打包寄出。</p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 order-md-2 mb-4">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted">您购买的商品</span>
+          <span class="badge badge-secondary badge-pill">2</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">新 Nokia 8110</h6>
+              <small class="text-muted">黑色版</small>
+            </div>
+            <span class="text-muted">￥399</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-condensed">
+            <div>
+              <h6 class="my-0">新 Nokia 8110</h6>
+              <small class="text-muted">黄色版</small>
+            </div>
+            <span class="text-muted">￥399</span>
+          </li>
+          
+          <li class="list-group-item d-flex justify-content-between bg-light">
+            <div class="text-success">
+              <h6 class="my-0">优惠金额</h6>
+              <small>满减5元</small>
+            </div>
+            <span class="text-success">-￥5</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>结算额</span>
+            <strong>￥793</strong>
+          </li>
+        </ul>
+
+        <form class="card p-2">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="礼品码">
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-secondary">兑换</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">订单信息</h4>
+        <form class="needs-validation" novalidate>
+            <label for="firstName">收件人姓名</label>
+            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+            <div class="invalid-feedback">
+              请输入收件人姓名。
+            </div>
+
+          <div class="mb-3">
+            <label for="username">联系方式</label>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">+86</span>
+              </div>
+              <input type="text" class="form-control" id="username" placeholder="1XX-XXXX-XXXX" required>
+              <div class="invalid-feedback" style="width: 100%;">
+                请输入您的中国大陆手机号。
+              </div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="email">电子邮件 <span class="text-muted">(可不填)</span></label>
+            <input type="email" class="form-control" id="email" placeholder="you@example.com">
+            <div class="invalid-feedback">
+              请输入一个有效的邮件地址，方便追踪包裹信息。
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="address">收件地址</label>
+            <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+            <div class="invalid-feedback">
+              请输入您的收件地址。
+            </div>
+          </div>
+
+          <div class="row">
+            
+            <div class="col-md-3 mb-3">
+              <label for="zip">邮编</label>
+              <input type="text" class="form-control" id="zip" placeholder="100000" required>
+              <div class="invalid-feedback">
+                
+              </div>
+            </div>
+          </div>
+          <hr class="mb-4">
+
+          <h4 class="mb-3">支付方式</h4>
+
+          <div class="d-block my-3">
+            <div class="custom-control custom-radio">
+              <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+              <label class="custom-control-label" for="credit">信用卡</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
+              <label class="custom-control-label" for="debit">储蓄卡</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="Alipay" name="paymentMethod" type="radio" class="custom-control-input" required>
+              <label class="custom-control-label" for="paypal">支付宝</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="WeChatpay" name="paymentMethod" type="radio" class="custom-control-input" required>
+              <label class="custom-control-label" for="paypal">微信支付</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="cc-name">卡号/账户号</label>
+              <input type="text" class="form-control" id="cc-name" placeholder="" required>
+              <small class="text-muted">银联卡号/支付平台账号</small>
+              <div class="invalid-feedback">
+                必需输入账户名。
+              </div>
+            </div>
+            
+          </div>
+          
+          <hr class="mb-4">
+          <button class="btn btn-primary btn-lg btn-block" type="submit">确认下单</button>
+        </form>
+      </div>
+    </div>
+
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+      <p class="mb-1">&copy; 2020</p>
+      <P>Bulid By fudamai</P>
+      <p>联系邮箱：furight@foxmail.com</p>
+    </footer>
+  </div>
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+      'use strict';
+
+      window.addEventListener('load', function () {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+</body>
+
+</html>

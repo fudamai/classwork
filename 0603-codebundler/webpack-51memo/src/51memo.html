@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>51memo</title>
+    <link rel="stylesheet" href="css/memo.css">
+</head>
+
+<body>
+    <a name="top"></a>
+    <div class="container">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">关于</a></li>
+                    <li><a href="#">帮助</a></li>
+                </ul>
+            </nav>
+            <div class="info">
+                <button>登录</button>
+                <button>注册</button>
+            </div>
+        </header>
+
+        <div class="wrapper">
+            <aside class="sidebar">
+
+                <div class="done">
+                    <h3>已完成</h3>
+                    <ul id="done-list">
+                        <!-- <li><a href="#">写一行代码</a></li>
+                        <li><a href="#">写一行代码</a></li>
+                        <li><a href="#">写一行代码</a></li> -->
+                    </ul>
+                </div>
+                <div class="similar">
+                    <h3>相似备忘录</h3>
+                    <ul>
+                        <li><a href="#">写代码</a></li>
+                        <li><a href="#">写代码</a></li>
+                        <li><a href="#">写代码</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <section class="main">
+                <div class="today-list">
+                    <header>
+                        <h2>今日计划</h2>
+                        <div class="console">
+                            <button class="delete">删除所有备忘</button>
+                        </div>
+                    </header>
+                    <div class="quadrant">
+                        <div class="first-quadrant" id="first-quadrant">
+                            <div class="todo-title ">重要但不紧急</div>
+                        </div>
+                        <div class="second-quadrant" id="second-quadrant">
+                            <div class="todo-title ">重要且紧急</div>
+                        </div>
+                        <div class="third-quadrant" id="third-quadrant">
+                            <div class="todo-title ">紧急但不重要</div>
+                        </div>
+                        <div class="fourth-quadrant" id="fourth-quadrant">
+                            <div class="todo-title ">不重要也不紧急</div>
+                        </div>
+                    </div>
+
+                    <div class="todo-info">有事启奏，无事退朝</div>
+                </div>
+                <div class="add">
+                    <h2>添加备忘录</h2>
+                    <div>
+
+                    </div>
+                    <form action="">
+                        <div>
+                            <label for="item">输入：
+                                <input type="text" id="new-item" placeholder="需要做的事">
+                            </label>
+                        </div>
+
+                        <div>
+                            <label for="" class="first-quadrant">重要但不紧急
+                                <input type="radio" name="choose" value="1" checked>
+                            </label>
+                            <label for="" class="second-quadrant">重要且紧急
+                                <input type="radio" name="choose" value="2">
+                            </label>
+                            <label for="" class="third-quadrant">紧急但不重要
+                                <input type="radio" name="choose" value="3">
+                            </label>
+                            <label for="" class="fourth-quadrant">
+                                不重要也不紧急<input type="radio" name="choose" value="4">
+                            </label>
+                        </div>
+
+                        <p>
+                            <input type="submit" value="添加">
+                            <input type="reset" value="重置">
+                        </p>
+                    </form>
+
+                </div>
+            </section>
+        </div>
+        <a href="#top" class="to-top">上</a>
+        <footer>
+            <h3>页脚</h3>
+            <p>51meom V410</p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="js/memo.js"></script>
+</body>
+
+</html>
