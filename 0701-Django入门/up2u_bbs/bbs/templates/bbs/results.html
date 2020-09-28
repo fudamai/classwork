@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>问题列表</title>
+</head>
+
+<body>
+    <h1>{{ question.question_text }}</h1>
+    <ul>
+        {% for choice in question.choice_set.all %}
+        <li>{{ choice.choice_text }} -- {{ choice.votes }}vote{{ choice.votes|pluralize }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'bbs:detail' question.id %}">继续投票</a>
+</body>
+
+</html>

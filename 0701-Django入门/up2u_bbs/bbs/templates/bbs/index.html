@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>UP2U-BBS</title>
+    <style>
+        body {
+            margin: 0 auto;
+            width: 80%;
+            padding: 20px;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 38px;
+            margin: 15px;
+        }
+
+        .content {
+            padding: 25px;
+            margin: 15px;
+            border: 1px solid burlywood;
+        }
+
+        .topic_table {
+            border: 1px solid #bb2626ce;
+        }
+        .post_form {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">UP2U-BBS</div>
+    <nav>
+        <div class="hot">
+            <a href="/bbs">首页</a>|
+            热门话题：
+            {% for t in topic_list %}
+            {% if t.reply_set.count > 5 %}
+            <a href="{% url 'bbs:detail' t.id %}">{{ t.topic_text }}</a>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </nav>
+    <div class="content">
+
+        {% if topic_list %}
+        <table class="topic_table" border="1">
+            <thead>
+                <tr>
+                    <th width=60%>帖子主题</th>
+                    <th width=20%>发布者</th>
+                    <th width=20%>发布日期</th>
+                </tr>
+            </thead>
+            {% for topic in topic_list %}
+            <tbody class="topic_row">
+
+                <tr>
+                    <td class="topic_title"><a href="{% url 'bbs:detail' topic.id %}">{{ topic.topic_text }}</a>
+                    </td>
+                    <td>{{ topic.author }}</td>
+                    <td>{{ topic.pub_date|date:"Y-m-d H:i:s" }}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>没有帖子</p>
+        {% endif %}
+
+        <form action="{% url 'bbs:index' %}" method="post" class="post_form">
+            {% csrf_token %}
+            <label for="author">姓名：<input id="author" name="topic_author" type="text"></label>
+            <label for="topic">新话题：<input id="topic" name="topic_text" type="text"></label>
+            <input type="submit" value="提交" />
+        </form>
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    </div>
+
+</body>
+
+</html>
