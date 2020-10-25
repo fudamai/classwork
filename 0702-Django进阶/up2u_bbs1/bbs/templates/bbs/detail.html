@@ -1,0 +1,158 @@
+{% extends 'bbs/base.html' %}
+{% load static %}
+
+<style>
+    body {
+        margin: 0 auto;
+        width: 80%;
+        padding: 20px;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 28px;
+        margin: 15px;
+    }
+
+    .content {
+        padding: 25px;
+        margin: 15px;
+        border: 1px solid rgb(116, 174, 221);
+    }
+
+    .post_form {
+        margin: 10px;
+    }
+
+    .reply {
+        display: flex;
+        flex-direction: column;
+        height: 100px;
+    }
+
+    .author_div {
+        float: left;
+        width: 10%;
+    }
+
+    .reply_div {
+        float: left;
+        width: 90%;
+        background: lightcyan;
+        /* position: relative; */
+    }
+</style>
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block title %}
+| 详情页
+{% endblock %}
+
+{% block nav-hot %}
+
+<div class="nav-scroller bg-white shadow-sm">
+    <nav class="nav nav-underline">
+        {% for t in topic_list %}
+        {% if t.reply_set.count > 3 %}
+        <a class="nav-link active" href="{% url 'bbs:detail' t.id %}">{{ t.topic_text }}
+            <span class="badge badge-pill badge-primary align-text-bottom">{{ t.reply_set.count }}</span>
+
+        </a>
+        {% endif %}
+        {% endfor %}
+    </nav>
+</div>
+
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row border">
+        <h3 class="mx-2" id="topic-text">{{ topic.topic_text }}</h3>
+        <span hidden id="topic-id">{{ topic.id }}</span>
+        {% if topic.author == current_user.user %}
+        <button class="btn btn-danger" id="btn-edit-topic">编辑</button>
+        {% endif %}
+    </div class="row ">
+    <div class="row border">
+
+        <div class="col-2 border-right bg-light justify-content-center m-2">
+            <div class="usericon">
+                {% if topic.author.userprofile.picture %}
+                <img src="{{ topic.author.userprofile.picture.url }}" alt="用户头像" id="user_picture_img" style="height: 100px;">
+                {% else %}
+                <img src="{% static 'img/bs.png' %}" alt="用户头像" id="user_picture_img" style="height: 100px;">
+                {% endif %}
+            </div>
+            <div class="text-center border">{{ topic.author }}</div>
+        </div>
+        <div class="col m-2 d-flex flex-column justify-content-between">
+
+            <p>{{ topic.topic_description }}</p>
+            {% if topic.picture %}
+            <!-- <img src="{{ topic.picture.url }}" alt="topic-image" class="topic-image"> -->
+            <img src="{{ topic.picture.url }}" alt="topic-image" class="topic-image"
+                style="height: auto; width: 300px;">
+            {% endif %}
+            <div class="text-right text-muted font-weight-light align-self-end">0 楼 {{ topic.pub_date }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    {% for c in topic.reply_set.all %}
+
+    <div class="row border">
+        <div class="col-2 border-right bg-light justify-content-center m-2">
+            <div class="usericon">
+                {% if c.author.userprofile.picture %}
+                <img src="{{ c.author.userprofile.picture.url }}" alt="用户头像" id="user_picture_img"
+                style="height: 100px;">
+                {% else %}
+                <img src="{% static 'img/bs.png' %}" alt="用户头像" id="user_picture_img" style="height: 100px;">
+                {% endif %}
+            </div>
+            <div class="text-center border">{{ c.author }}</div>
+        </div>
+        <div class="col m-2 d-flex flex-column justify-content-between">
+
+            <p>{{ c.reply_text }}</p>
+            {% if c.picture %}
+            <img src="{{ c.picture.url }}" alt="topic-image" class="topic-image" style="height: auto; width: 300px;">
+            {% endif %}
+            <div class="text-right text-muted font-weight-light align-self-end">{{ forloop.counter }} 楼 {{ c.pub_date }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% if topic.reply_set.count == 0 %}
+    <p style="color: red;">无跟帖</p>
+    {% endif %}
+</div>
+
+
+<div class="content">
+    {% if error_message %}<p><strong style="color: red;">{{ error_message }}</strong></p>{% endif %}
+    
+    {% if current_user.is_login %}
+    <h3>欢迎，{{ current_user.user }}</h3>
+    <form action="{% url 'bbs:detail' topic.id %}" method="post" class="post_form m-3" enctype="multipart/form-data"
+        novalidate>
+        {% csrf_token %}
+        
+        {% include 'bbs/base_form.html' %}
+        <input type="submit" value="提交" class="btn btn-lg btn-secondary btn-block">
+    </form>
+    {% else %}
+    <h3>你没有登录，登录后才能评论</h3>
+    {% endif %}
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/edit.js' %}"></script>
+{% endblock%}

@@ -1,0 +1,19 @@
+.usericon {
+    /* width: 100px;
+    height: 100px; */
+    display: flex;
+    justify-content: center;
+}
+.reply-image {
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.topic-image {
+    height: 100px;
+}
+
+.detail-card {
+    /* min-height: 300px; */
+    /* border: 1px solid #9cd2e5; */
+}
