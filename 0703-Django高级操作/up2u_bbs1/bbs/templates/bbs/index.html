@@ -1,0 +1,79 @@
+{% extends 'bbs/base.html' %}
+{% load static %}
+
+{% block title %}
+ | 首页
+{% endblock %}
+{% block index_active %}active{% endblock %}
+
+{% block nav-hot %}
+
+<div class="nav-scroller bg-white shadow-sm">
+    <nav class="nav nav-underline">
+        {% for t in topic_list %}
+        {% if t.reply_set.count > 3 %}
+        <a class="nav-link active" href="{% url 'bbs:detail' t.id %}">{{ t.topic_text }}
+            <span class="badge badge-pill badge-primary align-text-bottom">{{ t.reply_set.count }}</span>
+
+        </a>
+        {% endif %}
+        {% endfor %}
+    </nav>
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+
+<div class="content">
+
+    {% if topic_list %}
+    <table class="table table-hover my-3 bg-light">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">话题</th>
+                <th scope="col">用户</th>
+                <th scope="col">发布时间</th>
+                <th scope="col">回帖数量</th>
+                <th scope="col">最后回帖</th>
+            </tr>
+        </thead>
+        {% for topic in topic_list %}
+
+        <tbody>
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>
+                    <a href="{% url 'bbs:detail' topic.id %}">{{ topic.topic_text }}</a>
+                </td>
+                <td>{{ topic.author }}</td>
+                <td>{{ topic.pub_date|date:"Y-m-d H:i:s" }}</td>
+                <td>{{ topic.reply_set.count }}</td>
+                <td>{{ topic.reply_set.last }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>没有帖子</p>
+    {% endif %}
+
+    {% if error_message %}<p><strong style="color: red;">{{ error_message }}</strong></p>{% endif %}
+
+
+    {% if current_user.is_login %}
+        <h3>欢迎，{{ current_user.user }}</h3>
+        <form action="{% url 'bbs:index' %}" method="post" class="post_form m-3" enctype="multipart/form-data"
+            novalidate>
+            {% csrf_token %}
+
+            {% include 'bbs/base_form.html' %}
+            <input type="submit" value="提交" class="btn btn-lg btn-secondary btn-block">
+        </form>
+        {% else %}
+        <h3>你没有登录，登录后才能评论</h3>
+        {% endif %}
+</div>
+{% endblock %}
