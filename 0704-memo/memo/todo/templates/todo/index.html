@@ -1,0 +1,290 @@
+{% extends 'todo/base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">{{ siteinfo.banner }}</h1>
+    <p class="lead">美好的一天开始了.</p>
+    <hr class="my-4">
+    <p>快规划一下今天要做的事情吧！</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#addModalCenter">添加</a>
+    </p>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addModalCenter" tabindex="-1" role="dialog" aria-labelledby="addModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addModalCenterTitle">添加新备忘信息</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'todo:add' %}" method="POST">
+          <!-- <div class="form-group">
+            <label for="memo-title" class="col-form-label">标题</label>
+            <input type="text" class="form-control" id="memo-title">
+          </div>
+          <div class="form-group">
+            <label for="memo-content" class="col-form-label">描述</label>
+            <textarea class="form-control" id="memo-content"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="important-input">权重</label>
+            <select id="important-input" class="form-control">
+              <option selected value="1" class="text-success">不重要不紧急</option>
+              <option value="2" class="text-warning">重要不紧急</option>
+              <option value="3" class="text-info">不重要但紧急</option>
+              <option value="4" class="text-danger">重要且紧急</option>
+            </select>
+          </div>
+
+          <div class="form-group duedate-input">
+            <p>执行时间</p>
+            <div class="form-row">
+              <div class="col">
+                <label for="year-select"></label>
+                <select name="year" id="year-select" class="form-control">
+                  {% for y in year_number %}
+                  <option value="{{ y }}" {% if y == today_date.year %}selected{% endif %}>{{ y }}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col">
+                <label for="year-select"></label>
+                <select name="year" id="year-select" class="form-control">
+                  {% for y in month_number %}
+                  <option value="{{ y }}" {% if y == today_date.month %}selected{% endif %}>{{ y }}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col">
+                <label for="year-select"></label>
+                <select name="year" id="year-select" class="form-control">
+                  {% for y in day_number %}
+                  <option value="{{ y }}" {% if y == today_date.day %}selected{% endif %}>{{ y }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+          </div> -->
+          {% csrf_token %}
+          
+          {{ add_form.as_p }}
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            <button type="submit" class="btn btn-primary">保存</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- modify Modal -->
+<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="modifyModalTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modifyModalTitle">修改备忘信息</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST">
+          {% csrf_token %}
+
+          {{ modifi_form.as_p }}
+          <!-- <div class="form-group">
+            <label for="memo-title" class="col-form-label">标题</label>
+            <input type="text" class="form-control" id="modify-memo-title" name="title">
+          </div>
+          <div class="form-group">
+            <label for="memo-content" class="col-form-label">描述</label>
+            <textarea class="form-control" id="modify-memo-content" name="content"></textarea>
+          </div> -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            <button type="submit" class="btn btn-primary">保存</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main role="main" class="container">
+  <div class="row">
+    <div class="col">
+      {% if not current_user.is_login %}
+      <ul class="list-group">
+        {% for todo in todo_list %}
+        {% include 'todo/todolist.html' %}
+        {% endfor %}       
+      </ul>
+      <hr class="my-4">
+      {% endif %}
+
+      <ul class="list-group">
+        <li class="list-group-item  list-group-item-action active">今天</li>
+        {% for todo in todo_today %}
+        {% include 'todo/todolist.html' %}
+        <!-- <li class="list-group-item list-group-item-{{ todo.get_class_type }}">
+          <div class="row">
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{ todo.title }}" data-id="{{ todo.id }}"
+                  {% if todo.finish == 'done' %} checked {% endif %}>
+                <label class="form-check-label" for="{{ todo.id }}">
+                  {{ todo.title }} | {{ todo.duedate | naturalday}}
+                </label>
+                <p class="" id="todo-content" hidden>{{ todo.content }}</p>
+              </div>
+            </div>
+            <div class="col">
+              <div class="btn-group float-right d-none" role="group" aria-label="Button group with nested dropdown">
+                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                  data-target="#modifyModal" data-id="{{ todo.id }}">修改</button>
+                <button type="button" class="btn btn-danger" data-id="{{ todo.id }}">删除</button>
+
+                <div class="btn-group" role="group">
+                  <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    移动
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="#">明天</a>
+                    <a class="dropdown-item" href="#">下一周</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li> -->
+        {% endfor %}
+      </ul>
+      <hr class="my-4">
+
+      <ul class="list-group">
+        <li class="list-group-item  list-group-item-action active">明天</li>
+        {% for todo in todo_tomorrow %}
+        {% include 'todo/todolist.html' %}
+
+        <!-- <li class="list-group-item list-group-item-{{ todo.get_class_type }}">
+          <div class="row">
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{ todo.title }}" data-id="{{ todo.id }}"
+                  {% if todo.finish == 'done' %} checked {% endif %}>
+                <label class="form-check-label" for="{{ todo.id }}">
+                  {{ todo.title }} | {{ todo.duedate | naturalday}}
+                </label>
+                <p class="" id="todo-content" hidden>{{ todo.content }}</p>
+
+              </div>
+            </div>
+            <div class="col">
+              <div class="btn-group float-right d-none" role="group" aria-label="Button group with nested dropdown">
+                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                  data-target="#modifyModal" data-id="{{ todo.id }}">修改</button>
+                <button type="button" class="btn btn-danger" data-id="{{ todo.id }}">删除</button>
+
+                <div class="btn-group" role="group">
+                  <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    移动
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="#">明天</a>
+                    <a class="dropdown-item" href="#">下一周</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li> -->
+        {% endfor %}
+      </ul>
+      <hr class="my-4">
+
+      <ul class="list-group">
+        <li class="list-group-item  list-group-item-action active">下一周</li>
+        {% for todo in todo_next_week %}
+        {% include 'todo/todolist.html' %}
+
+        <!-- <li class="list-group-item list-group-item-{{ todo.get_class_type }}">
+          <div class="row">
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{ todo.title }}" data-id="{{ todo.id }}"
+                  {% if todo.finish == 'done' %} checked {% endif %}>
+                <label class="form-check-label" for="{{ todo.id }}">
+                  {{ todo.title }} | {{ todo.duedate | naturalday}}
+                </label>
+                <p class="" id="todo-content" hidden>{{ todo.content }}</p>
+
+              </div>
+            </div>
+            <div class="col">
+              <div class="btn-group float-right d-none" role="group" aria-label="Button group with nested dropdown">
+                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                  data-target="#modifyModal" data-id="{{ todo.id }}">修改</button>
+                <button type="button" class="btn btn-danger" data-id="{{ todo.id }}">删除</button>
+
+                <div class="btn-group" role="group">
+                  <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    移动
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <a class="dropdown-item" href="#">明天</a>
+                    <a class="dropdown-item" href="#">下一周</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li> -->
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="col col-4">
+      <ul class="list-group">
+        <p class="lead">本周总结</p>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          进行中
+          <span class="badge badge-primary badge-pill">{{ todo_doing.count }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          已完成
+          <span class="badge badge-primary badge-pill">{{ todo_done.count }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          已放弃
+          <span class="badge badge-primary badge-pill">{{ todo_overdue.count }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</main><!-- /.container -->
+{% csrf_token %}
+
+{% endblock %}

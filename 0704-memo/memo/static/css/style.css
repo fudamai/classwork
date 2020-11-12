@@ -1,0 +1,12 @@
+.usericon {
+    width: 30px;
+    height: 30px;
+}
+.reply-image {
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.topic-image {
+    height: 100px;
+}

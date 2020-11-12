@@ -1,0 +1,210 @@
+{% load humanize %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="cn-zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <!-- <link rel="stylesheet" href="css/bootstrap4-executive-suite.css"> -->
+    <!-- <link rel="stylesheet" href="https://bootswatch.com/4/pulse/bootstrap.css"> -->
+    <link rel="stylesheet" href="{% static 'css/memo.css' %}">
+
+    {% block style %}
+    {% endblock %}
+    <title>51memo x bootstrap</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="{% url 'todo:home' %}">51MEMO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'todo:home' %}">首页 <span class="sr-only">(current)</span></a>
+                </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0" method="GET" action="{% url 'todo:query' %}">
+                <input class="form-control mr-sm-2" type="text" placeholder="搜索" aria-label="Search" name="q"
+                    value="{{ request.GET.q }}">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+            </form>
+            {% if current_user.is_login %}
+            
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'todo:home' %}">{{ current_user.user }}<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'accounts:logout' %}">退出</a>
+                </li>
+            </ul>
+            {% else %}
+                <ul class="navbar-nav">
+                    <li class="nav-item {% block login_active %}{% endblock %}">
+                        <a class="nav-link" href="{% url 'accounts:login' %}">登录 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item {% block register_active %}{% endblock %}">
+                        <a class="nav-link" href="{% url 'accounts:register' %}">注册</a>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer class="container py-5">
+        <div class="row">
+            <div class="col-12 col-md">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="d-block mb-2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="14.31" y1="8" x2="20.05" y2="17.94"></line>
+                    <line x1="9.69" y1="8" x2="21.17" y2="8"></line>
+                    <line x1="7.38" y1="12" x2="13.12" y2="2.06"></line>
+                    <line x1="9.69" y1="16" x2="3.95" y2="6.06"></line>
+                    <line x1="14.31" y1="16" x2="2.83" y2="16"></line>
+                    <line x1="16.62" y1="12" x2="10.88" y2="21.94"></line>
+                </svg>
+                <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+            </div>
+            {% for col in siteinfo.footer.col_set.all %}
+            <div class="col-6 col-md">
+                <h5>{{ col.title }}</h5>
+                <ul class="list-unstyled text-small">
+                    {% for item in col.item_set.all %}
+                    <li><a class="text-muted" href="{{item.url}}">{{ item.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endfor %}
+
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+          ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+    <script>
+        $(function () {
+            // 是否显示操作按钮
+            $('.list-group-item').hover(function () {
+                const div = $(this).find('.btn-group')[0];
+                // console.log(div);
+                if (div) {
+                    $(div).removeClass('d-none');
+                }
+
+                // 1 找到删除按钮
+                // 2 发送删除的请求
+                // 3 刷新页面
+                $(div).find('.btn.btn-danger').click(function () {
+                    // alert('删除！');
+                    const id = $(this).data('id');
+                    console.log(id);
+                    const url = id + '/delete/';
+                    $.post(url, {
+                        'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val()
+                    }, function (data) {
+                        // console.log(data);
+                        window.location.reload();
+                    })
+
+                })
+            }, function () {
+                const div = $(this).find('.btn-group')[0];
+                // console.log(div);
+                if (div) {
+                    $(div).addClass('d-none');
+                }
+            });
+
+            // 判断完成状态
+            // 1.找到checkbox
+            // 2.判断是否完成
+            // 3.发送请求更新数据库
+            $("input[type='checkbox']").click(function () {
+                let isChecked = $(this).attr('checked')
+                console.log('1,', isChecked);
+                data = {
+                    'finish': 'doing'
+                }
+
+                if (isChecked) {
+                    $(this).attr('checked', false)
+                } else {
+                    $(this).attr('checked', true);
+                    data.finish = 'done';
+                }
+                isChecked = $(this).attr('checked')
+                console.log('2', isChecked);
+
+
+                const id = $(this).data('id');
+                console.log(id);
+                const url = id + '/check/';
+                $.post(url, {
+                    ...data,
+                    'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val()
+                }, function (data) {
+                    // console.log(data);
+                    window.location.reload();
+                })
+            })
+            // 修改信息
+            $('#modifyModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget) // Button that triggered the modal
+                console.log(this);
+                const id = button.data('id');
+                const url = id + '/'
+                // console.log(button);
+                var modal = $(this);
+                var title = button.parent().parent().prev().find('.form-check-input').val()
+                var content = button.parent().parent().prev().find('#todo-content').text()
+                // console.log(title);
+                // modal.find('#modify-memo-title').val(title);
+                // modal.find('#modify-memo-content').val(content);
+                modal.find('#id_title').val(title);
+                modal.find('#id_content').val(content);
+                modal.find("form").attr({action:url});
+            })
+
+            // 更改时间
+            // 确认被点击按钮
+            $("button.update").click(function(event) {
+                const todo_id = $(this).parent().prev().data('id');
+                console.log('id', todo_id);
+                const funcid = $(this).attr('id');
+                console.log('更新', funcid);
+                const url = todo_id + '/update/';
+                data = {'key':funcid}
+
+                $.post(url, {...data,
+                    'csrfmiddlewaretoken': $('[name="csrfmiddlewaretoken"]').val()}, function(data){
+                    window.location.reload();
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

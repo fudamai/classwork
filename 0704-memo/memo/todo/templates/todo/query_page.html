@@ -1,0 +1,53 @@
+{% extends 'todo/base.html' %}
+{% load humanize %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    {% if todo_query_list %}
+    <div class="row">
+        <div class="col">
+            <ul class="list-group">
+                <li class="list-group-item  list-group-item-action active">今天</li>
+                {% for todo in todo_query_list %}
+                <li class="list-group-item list-group-item-{{ todo.get_class_type }}">
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="{{ todo.title }}"
+                                    data-id="{{ todo.id }}" {% if todo.finish == 'done' %} checked {% endif %}>
+                                <label class="form-check-label" for="{{ todo.id }}">
+                                    {{ todo.title }} | {{ todo.updated | naturalday}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="btn-group float-right d-none" role="group"
+                                aria-label="Button group with nested dropdown">
+                                <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                    data-target="#modifyModal">修改</button>
+                                <button type="button" class="btn btn-danger" data-id="{{ todo.id }}">删除</button>
+
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        移动
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                        <a class="dropdown-item" href="#">明天</a>
+                                        <a class="dropdown-item" href="#">下一周</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <p>没有符合条件的结果。</p>
+    {% endif %}
+</div>
+{% endblock %}
