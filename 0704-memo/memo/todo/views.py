@@ -36,19 +36,16 @@ class TodoListView(ListView):
 
         end_week = start_week + datetime.timedelta(days=7)
 
-        # todo_list = Todo.objects.all()
         todo_list = self.get_queryset()
-        context['today_date'] = today
-        context['year_number'] = [n for n in range(1995, 2100)]
-        context['month_number'] = [n for n in range(1, 13)]
-        context['day_number'] = [n for n in range(1, 32)]
 
         context['todo_today'] = todo_list.filter(duedate__day=today.day, duedate__month=today.month)
         context['todo_tomorrow'] = todo_list.filter(duedate__day=tomorrow.day, duedate__month=tomorrow.month)
         context['todo_next_week'] = todo_list.filter(duedate__range=[start_week, end_week])
+
         context['todo_doing'] = todo_list.filter(finish='doing', duedate__gte=today)
         context['todo_done'] = todo_list.filter(finish='done')
         context['todo_overdue'] = todo_list.filter(finish='doing', duedate__lt=today)
+        
         context['siteinfo'] = {
             'footer' : Footer.objects.all().first(),
             'banner' : Banner.objects.all().first()
@@ -104,13 +101,6 @@ class TodoAddView(CreateView):
             todo.save()
         return redirect('todo:home')      
 
-    # def form_valid(self, form):
-    #     print(form)
-    #     todo = form.save(commit=False)
-    #     todo.save()
-
-    #     return redirect('todo:home')
-
 
 @method_decorator(login_required, name='post')
 class TodoDeleteView(View):
@@ -135,7 +125,6 @@ class TodoCheckView(View):
         return redirect('todo:home')
 
 
-# @method_decorator(login_required, name='get_queryset')
 class TodoQueryView(ListView):
     model = Todo
     template_name = 'todo/query_page.html'
@@ -143,9 +132,10 @@ class TodoQueryView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        print(queryset)
+        # print(queryset)
         query = self.request.GET.get('q')
         # print(query)
+        # 用户未登录，返回查询结果为空
         if self.request.user.is_authenticated:
             if query:
                 return queryset.filter(

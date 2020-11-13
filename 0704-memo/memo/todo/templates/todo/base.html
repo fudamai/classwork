@@ -8,8 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-    <!-- <link rel="stylesheet" href="css/bootstrap4-executive-suite.css"> -->
-    <!-- <link rel="stylesheet" href="https://bootswatch.com/4/pulse/bootstrap.css"> -->
     <link rel="stylesheet" href="{% static 'css/memo.css' %}">
 
     {% block style %}
@@ -144,7 +142,7 @@
             // 3.发送请求更新数据库
             $("input[type='checkbox']").click(function () {
                 let isChecked = $(this).attr('checked')
-                console.log('1,', isChecked);
+                // console.log('1,', isChecked);
                 data = {
                     'finish': 'doing'
                 }
@@ -156,11 +154,11 @@
                     data.finish = 'done';
                 }
                 isChecked = $(this).attr('checked')
-                console.log('2', isChecked);
+                // console.log('2', isChecked);
 
 
                 const id = $(this).data('id');
-                console.log(id);
+                // console.log(id);
                 const url = id + '/check/';
                 $.post(url, {
                     ...data,
@@ -173,7 +171,7 @@
             // 修改信息
             $('#modifyModal').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget) // Button that triggered the modal
-                console.log(this);
+                // console.log(this);
                 const id = button.data('id');
                 const url = id + '/'
                 // console.log(button);
@@ -181,8 +179,7 @@
                 var title = button.parent().parent().prev().find('.form-check-input').val()
                 var content = button.parent().parent().prev().find('#todo-content').text()
                 // console.log(title);
-                // modal.find('#modify-memo-title').val(title);
-                // modal.find('#modify-memo-content').val(content);
+                
                 modal.find('#id_title').val(title);
                 modal.find('#id_content').val(content);
                 modal.find("form").attr({action:url});
@@ -192,9 +189,9 @@
             // 确认被点击按钮
             $("button.update").click(function(event) {
                 const todo_id = $(this).parent().prev().data('id');
-                console.log('id', todo_id);
+                // console.log('id', todo_id);
                 const funcid = $(this).attr('id');
-                console.log('更新', funcid);
+                // console.log('更新', funcid);
                 const url = todo_id + '/update/';
                 data = {'key':funcid}
 
