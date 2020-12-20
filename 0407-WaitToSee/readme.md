@@ -11,7 +11,8 @@
 要求三：没写。但在对json文件的分析中发现，json文件中包含了更新时间，以及精确到到市一级的国内数据。如果要实现查询全国数据，需对这些数据进行处理。
 
 示例代码，从redis中取保存的数据
-```
+
+```py
 client = redis.Redis()
 
 data = client.get('celery-task-meta-fedecad9-e593-4fdd-b8e7-fb30d0b7186d')
@@ -20,7 +21,8 @@ json_data = json.loads(data)
 
 json_data['result']['component'][0]['mapLastUpdatedTime']  
 ```
-``` 
+
+```cmd
 In [27]: json_data['result']['component'][0]['mapLastUpdatedTime']                                       
 Out[27]: '2020.04.11 16:48'
 
