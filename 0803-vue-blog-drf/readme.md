@@ -7,7 +7,7 @@
 
 # 后端
 
-[项目文件位置：](./vue_blog_api)./vue_blog_api
+[项目文件位置：](0803-vue-blog-drf\vue_blog_api)0803-vue-blog-drf\vue_blog_api
 
 后端项目运行前需安装依赖环境。进入项目主目录，使用下面命令安装依赖软件：
 
@@ -23,7 +23,7 @@ python manage.py runserver
 
 # 前端
 
-[项目文件位置：](./blog-vue)./blog-vue
+[项目文件位置：](0803-blog-vue)0803-blog-vue
 
 前端项目运行前需安装依赖环境。进入项目主目录，使用下面命令安装依赖软件：
 
